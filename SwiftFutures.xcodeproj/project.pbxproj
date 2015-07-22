@@ -9,7 +9,12 @@
 /* Begin PBXBuildFile section */
 		28CE3C911B60401A0071174F /* SwiftFutures.h in Headers */ = {isa = PBXBuildFile; fileRef = 28CE3C901B60401A0071174F /* SwiftFutures.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		28CE3C981B60401A0071174F /* SwiftFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28CE3C8D1B60401A0071174F /* SwiftFutures.framework */; };
-		28CE3C9D1B60401A0071174F /* SwiftFuturesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE3C9C1B60401A0071174F /* SwiftFuturesTests.swift */; };
+		28CE3CA81B6040310071174F /* Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE3CA71B6040310071174F /* Either.swift */; };
+		28CE3CAA1B6041510071174F /* Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE3CA91B6041510071174F /* Future.swift */; };
+		28CE3CAD1B60475B0071174F /* EitherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE3CAC1B60475B0071174F /* EitherTests.swift */; };
+		28CE3CAE1B6047840071174F /* Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE3CA71B6040310071174F /* Either.swift */; };
+		28CE3CAF1B6047870071174F /* Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE3CA91B6041510071174F /* Future.swift */; };
+		28CE3CB11B6049C00071174F /* FutureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE3CB01B6049C00071174F /* FutureTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,8 +32,12 @@
 		28CE3C901B60401A0071174F /* SwiftFutures.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftFutures.h; sourceTree = "<group>"; };
 		28CE3C921B60401A0071174F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28CE3C971B60401A0071174F /* SwiftFuturesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftFuturesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		28CE3C9C1B60401A0071174F /* SwiftFuturesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftFuturesTests.swift; sourceTree = "<group>"; };
 		28CE3C9E1B60401A0071174F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28CE3CA71B6040310071174F /* Either.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Either.swift; sourceTree = "<group>"; };
+		28CE3CA91B6041510071174F /* Future.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Future.swift; sourceTree = "<group>"; };
+		28CE3CAB1B60475B0071174F /* SwiftFuturesTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftFuturesTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		28CE3CAC1B60475B0071174F /* EitherTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EitherTests.swift; sourceTree = "<group>"; };
+		28CE3CB01B6049C00071174F /* FutureTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FutureTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +81,8 @@
 			isa = PBXGroup;
 			children = (
 				28CE3C901B60401A0071174F /* SwiftFutures.h */,
+				28CE3CA71B6040310071174F /* Either.swift */,
+				28CE3CA91B6041510071174F /* Future.swift */,
 				28CE3C921B60401A0071174F /* Info.plist */,
 			);
 			path = SwiftFutures;
@@ -80,8 +91,10 @@
 		28CE3C9B1B60401A0071174F /* SwiftFuturesTests */ = {
 			isa = PBXGroup;
 			children = (
-				28CE3C9C1B60401A0071174F /* SwiftFuturesTests.swift */,
 				28CE3C9E1B60401A0071174F /* Info.plist */,
+				28CE3CAC1B60475B0071174F /* EitherTests.swift */,
+				28CE3CB01B6049C00071174F /* FutureTests.swift */,
+				28CE3CAB1B60475B0071174F /* SwiftFuturesTests-Bridging-Header.h */,
 			);
 			path = SwiftFuturesTests;
 			sourceTree = "<group>";
@@ -142,6 +155,7 @@
 		28CE3C841B60401A0071174F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Neil Gall";
 				TargetAttributes = {
@@ -193,6 +207,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28CE3CAA1B6041510071174F /* Future.swift in Sources */,
+				28CE3CA81B6040310071174F /* Either.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,7 +216,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28CE3C9D1B60401A0071174F /* SwiftFuturesTests.swift in Sources */,
+				28CE3CAF1B6047870071174F /* Future.swift in Sources */,
+				28CE3CAE1B6047840071174F /* Either.swift in Sources */,
+				28CE3CB11B6049C00071174F /* FutureTests.swift in Sources */,
+				28CE3CAD1B60475B0071174F /* EitherTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,6 +326,7 @@
 		28CE3CA21B60401A0071174F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -317,12 +337,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.neilgall.SwiftFutures;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		28CE3CA31B60401A0071174F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -339,20 +361,25 @@
 		28CE3CA51B60401A0071174F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = SwiftFuturesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.neilgall.SwiftFuturesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftFuturesTests/SwiftFuturesTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		28CE3CA61B60401A0071174F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = SwiftFuturesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.neilgall.SwiftFuturesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftFuturesTests/SwiftFuturesTests-Bridging-Header.h";
 			};
 			name = Release;
 		};
