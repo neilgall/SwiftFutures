@@ -20,7 +20,7 @@ class FutureTests: XCTestCase {
         async = nil
     }
     
-    func wait() {
+    private func wait() {
         waitForExpectationsWithTimeout(1.0, handler: nil)
     }
     
@@ -33,13 +33,16 @@ class FutureTests: XCTestCase {
         wait()
     }
     
-    func testGenuineAsync() {
-        let f = Future<Int>() { get in
+    private func genuineAsync(i: Int) -> Future<Int> {
+        return Future<Int>() { get in
             dispatch_async(dispatch_get_main_queue()) {
-                get(5)
+                get(i)
             }
         }
-        f.get { v in
+    }
+    
+    func testGenuineAsync() {
+        genuineAsync(5).get { v in
             XCTAssertEqual(v, 5)
             self.async?.fulfill()
         }
@@ -85,11 +88,11 @@ class FutureTests: XCTestCase {
         wait()
     }
 
-    func add(a: Int)(_ b: Int) -> Int {
+    private func add(a: Int)(_ b: Int) -> Int {
         return a+b
     }
     
-    func asyncAdd(a: Int)(_ b: Int) -> Future<Int> {
+    private func asyncAdd(a: Int)(_ b: Int) -> Future<Int> {
         return Future() { get in
             dispatch_async(dispatch_get_main_queue()) {
                 get(a+b)
@@ -112,6 +115,61 @@ class FutureTests: XCTestCase {
         let g = f.flatMap(asyncAdd(5))
         g.get { v in
             XCTAssertEqual(v, 8)
+            self.async?.fulfill()
+        }
+        wait()
+    }
+    
+    func testInfixFmap() {
+        let f = add(2) <%> pure(6)
+        f.get { v in
+            XCTAssertEqual(v, 8)
+            self.async?.fulfill()
+        }
+        wait()
+    }
+    
+    func testInfixApply() {
+        let f = pure(add(9)) <*> genuineAsync(7)
+        f.get { v in
+            XCTAssertEqual(v, 16)
+            self.async?.fulfill()
+        }
+        wait()
+    }
+    
+    func testApplicativeStyle() {
+        let f = add <%> genuineAsync(3) <*> genuineAsync(8)
+        f.get { v in
+            XCTAssertEqual(v, 11)
+            self.async?.fulfill()
+        }
+        wait()
+    }
+    
+    func testMonadicBind() {
+        let f = pure(2) >>- asyncAdd(3)
+        f.get { v in
+            XCTAssertEqual(v, 5)
+            self.async?.fulfill()
+        }
+        wait()
+    }
+
+    func testChainedMonadicBind() {
+        let f = pure(2) >>- asyncAdd(3) >>- asyncAdd(7)
+        f.get { v in
+            XCTAssertEqual(v, 12)
+            self.async?.fulfill()
+        }
+        wait()
+    }
+    
+    func testMonadicBindWithReduce() {
+        let values = [7, 9, 14, 3, 6].map(asyncAdd)
+        let f = values.reduce(pure(0), combine: >>-)
+        f.get { v in
+            XCTAssertEqual(v, 39)
             self.async?.fulfill()
         }
         wait()
