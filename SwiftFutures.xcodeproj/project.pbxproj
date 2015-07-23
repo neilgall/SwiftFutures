@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		286115371B60CD5800268DDB /* CompletionFuture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286115361B60CD5800268DDB /* CompletionFuture.swift */; };
+		286115381B60CE3700268DDB /* CompletionFuture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286115361B60CD5800268DDB /* CompletionFuture.swift */; };
 		28CE3C911B60401A0071174F /* SwiftFutures.h in Headers */ = {isa = PBXBuildFile; fileRef = 28CE3C901B60401A0071174F /* SwiftFutures.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		28CE3C981B60401A0071174F /* SwiftFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28CE3C8D1B60401A0071174F /* SwiftFutures.framework */; };
 		28CE3CA81B6040310071174F /* Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE3CA71B6040310071174F /* Either.swift */; };
@@ -28,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		286115361B60CD5800268DDB /* CompletionFuture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompletionFuture.swift; sourceTree = "<group>"; };
 		28CE3C8D1B60401A0071174F /* SwiftFutures.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftFutures.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		28CE3C901B60401A0071174F /* SwiftFutures.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftFutures.h; sourceTree = "<group>"; };
 		28CE3C921B60401A0071174F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -83,6 +86,7 @@
 				28CE3C901B60401A0071174F /* SwiftFutures.h */,
 				28CE3CA71B6040310071174F /* Either.swift */,
 				28CE3CA91B6041510071174F /* Future.swift */,
+				286115361B60CD5800268DDB /* CompletionFuture.swift */,
 				28CE3C921B60401A0071174F /* Info.plist */,
 			);
 			path = SwiftFutures;
@@ -208,6 +212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				28CE3CAA1B6041510071174F /* Future.swift in Sources */,
+				286115371B60CD5800268DDB /* CompletionFuture.swift in Sources */,
 				28CE3CA81B6040310071174F /* Either.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -220,6 +225,7 @@
 				28CE3CAE1B6047840071174F /* Either.swift in Sources */,
 				28CE3CB11B6049C00071174F /* FutureTests.swift in Sources */,
 				28CE3CAD1B60475B0071174F /* EitherTests.swift in Sources */,
+				286115381B60CE3700268DDB /* CompletionFuture.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,6 +408,7 @@
 				28CE3CA31B60401A0071174F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		28CE3CA41B60401A0071174F /* Build configuration list for PBXNativeTarget "SwiftFuturesTests" */ = {
 			isa = XCConfigurationList;
@@ -410,6 +417,7 @@
 				28CE3CA61B60401A0071174F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

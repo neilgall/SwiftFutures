@@ -174,4 +174,57 @@ class FutureTests: XCTestCase {
         }
         wait()
     }
+    
+    func testCapturingCompletionBlockWithAsyncDispatch() {
+        func async(r: Int, completion: Int -> ()) {
+            dispatch_async(dispatch_get_main_queue()) {
+                completion(r)
+            }
+        }
+        
+        let f = CompletionFuture<Int>()
+        async(3, completion: f.closure)
+        
+        f.get { r in
+            XCTAssertEqual(r, 3);
+            self.async?.fulfill()
+        }
+        wait()
+    }
+
+    func testCapturingCompletionBlockWithSyncDispatch() {
+        func sync(r: Int, completion: Int -> ()) {
+            completion(r)
+        }
+        
+        let f = CompletionFuture<Int>()
+        sync(3, completion: f.closure)
+        
+        f.get { r in
+            XCTAssertEqual(r, 3);
+            self.async?.fulfill()
+        }
+        wait()
+    }
+    
+    func testApplicativeUseOfCompletionClosures() {
+        func async(r: Int, completion: Int -> ()) {
+            dispatch_async(dispatch_get_main_queue()) {
+                completion(r)
+            }
+        }
+        
+        let f = CompletionFuture<Int>()
+        let g = CompletionFuture<Int>()
+
+        async(3, completion: f.closure)
+        async(6, completion: g.closure)
+        
+        let r = add <%> f <*> g
+        r.get { v in
+            XCTAssertEqual(v, 9);
+            self.async?.fulfill()
+        }
+        wait()
+    }
 }

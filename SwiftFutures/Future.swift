@@ -9,13 +9,24 @@
 import Foundation
 
 // A future value of type Value
-// Supports functor-style fmap over the contained value.
-// Value can be obtained by passing a closure to be invoked
+// Supports functor-style fmap and flatMap over the contained value.
+// Value can be obtained by passing a closure to `get` to be invoked
 // once the value is available.
 //
-public struct Future<Value> {
-    let get : (Value -> ()) -> ()
-    
+public protocol FutureType {
+    typealias Value
+    var get : (Value -> ()) -> () { get }
+}
+
+// A simple FutureType implementation which is used for the return
+// type for most combinators.
+//
+public struct Future<V>: FutureType {
+    public typealias Value = V
+    public let get: (V -> ()) -> ()
+}
+
+extension FutureType {
     // Map f over this future. Returns a new Future with the
     // eventual result of applying f to the value in this future.
     //
@@ -23,8 +34,8 @@ public struct Future<Value> {
     // @return a new Future containing the result of applying f to
     // this future's eventual value.
     //
-    public func fmap<R>(f: Value -> R) -> Future<R> {
-        return Future<R>() { getr in self.get { getr(f($0)) } }
+    public func fmap<V>(f: Value -> V) -> Future<V> {
+        return Future<V>() { getr in self.get { getr(f($0)) } }
     }
     
     // Flat-map f over this future. Returns the result of f
@@ -33,8 +44,8 @@ public struct Future<Value> {
     // @param f a function receiving this future's Value
     // @return the result of applying f to this future's eventual value
     //
-    public func flatMap<R>(f: Value -> Future<R>) -> Future<R> {
-        return Future<R>() { getr in self.get { f($0).get { getr($0) } } }
+    public func flatMap<V, F: FutureType where F.Value == V>(f: Value -> F) -> Future<V> {
+        return Future<V>() { getr in self.get { f($0).get { getr($0) } } }
     }
 }
 
@@ -57,7 +68,7 @@ public func pure<V>(v: V) -> Future<V> {
 // @param v a Future value
 // @return a Future optional, containing .Some(v)
 //
-public func lift<V>(v: Future<V>) -> Future<Optional<V>> {
+public func lift<V,F:FutureType where F.Value == V>(v: F) -> Future<Optional<V>> {
     return Future() { getOptional in v.get { getOptional(.Some($0)) } }
 }
 
@@ -68,7 +79,7 @@ public func lift<V>(v: Future<V>) -> Future<Optional<V>> {
 // @param v a Future value
 // @return a Future Either, containing .Value(v)
 //
-public func lift<V,E>(v: Future<V>) -> Future<Either<V,E>> {
+public func lift<E,F:FutureType>(v: F) -> Future<Either<F.Value,E>> {
     return Future() { getEither in v.get { getEither(.Value($0)) } }
 }
 
@@ -80,7 +91,7 @@ public func lift<V,E>(v: Future<V>) -> Future<Either<V,E>> {
 // rhs's eventual value.
 //
 infix operator <%> { associativity left }
-public func <%> <A, B>(lhs: A -> B, rhs: Future<A>) -> Future<B> {
+public func <%> <F:FutureType, R>(lhs: F.Value -> R, rhs: F) -> Future<R> {
     return rhs.fmap(lhs)
 }
 
@@ -92,7 +103,7 @@ public func <%> <A, B>(lhs: A -> B, rhs: Future<A>) -> Future<B> {
 // function in lhs to the eventual value in rhs.
 //
 infix operator <*> { associativity left }
-public func <*> <A,B>(lhs: Future<A -> B>, rhs: Future<A>) -> Future<B> {
+public func <*> <LHS:FutureType, RHS:FutureType, R where LHS.Value == RHS.Value -> R>(lhs: LHS, rhs: RHS) -> Future<R> {
     return Future() { getb in rhs.get { a in lhs.get { getb($0(a)) } } }
 }
 
@@ -104,6 +115,6 @@ public func <*> <A,B>(lhs: Future<A -> B>, rhs: Future<A>) -> Future<B> {
 // value inside lhs
 //
 infix operator >>- { associativity left }
-public func >>- <A,B> (lhs: Future<A>, rhs: A -> Future<B>) -> Future<B> {
+public func >>- <LHS:FutureType, RHS:FutureType> (lhs: LHS, rhs: LHS.Value -> RHS) -> Future<RHS.Value> {
     return Future() { getb in lhs.get { rhs($0).get(getb) } }
 }
