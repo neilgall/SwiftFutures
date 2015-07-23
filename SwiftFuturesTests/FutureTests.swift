@@ -92,6 +92,10 @@ class FutureTests: XCTestCase {
         return a+b
     }
     
+    private func subtract(a: Int)(_ b: Int) -> Int {
+        return a-b
+    }
+    
     private func asyncAdd(a: Int)(_ b: Int) -> Future<Int> {
         return Future() { get in
             dispatch_async(dispatch_get_main_queue()) {
@@ -99,8 +103,16 @@ class FutureTests: XCTestCase {
             }
         }
     }
-    
-    func testFmap() {
+
+    private func asyncSubtract(a: Int)(_ b: Int) -> Future<Int> {
+        return Future() { get in
+            dispatch_async(dispatch_get_main_queue()) {
+                get(a-b)
+            }
+        }
+    }
+
+    func testFmapAdd() {
         let f = pure(3)
         let g = f.fmap(add(2))
         g.get { v in
@@ -109,8 +121,18 @@ class FutureTests: XCTestCase {
         }
         wait()
     }
-    
-    func testFlatmap() {
+
+    func testFmapSubtract() {
+        let f = pure(2)
+        let g = f.fmap(subtract(3))
+        g.get { v in
+            XCTAssertEqual(v, 1)
+            self.async?.fulfill()
+        }
+        wait()
+    }
+
+    func testFlatMapAdd() {
         let f = pure(3)
         let g = f.flatMap(asyncAdd(5))
         g.get { v in
@@ -119,8 +141,18 @@ class FutureTests: XCTestCase {
         }
         wait()
     }
-    
-    func testInfixFmap() {
+
+    func testFlatMapSubtract() {
+        let f = pure(3)
+        let g = f.flatMap(asyncSubtract(5))
+        g.get { v in
+            XCTAssertEqual(v, 2)
+            self.async?.fulfill()
+        }
+        wait()
+    }
+
+    func testInfixFmapAdd() {
         let f = add(2) <%> pure(6)
         f.get { v in
             XCTAssertEqual(v, 8)
@@ -128,8 +160,17 @@ class FutureTests: XCTestCase {
         }
         wait()
     }
-    
-    func testInfixApply() {
+
+    func testInfixFmapSubtract() {
+        let f = subtract(6) <%> pure(2)
+        f.get { v in
+            XCTAssertEqual(v, 4)
+            self.async?.fulfill()
+        }
+        wait()
+    }
+
+    func testInfixApplyAdd() {
         let f = pure(add(9)) <*> genuineAsync(7)
         f.get { v in
             XCTAssertEqual(v, 16)
@@ -137,8 +178,17 @@ class FutureTests: XCTestCase {
         }
         wait()
     }
-    
-    func testApplicativeStyle() {
+
+    func testInfixApplySubtract() {
+        let f = pure(subtract(9)) <*> genuineAsync(7)
+        f.get { v in
+            XCTAssertEqual(v, 2)
+            self.async?.fulfill()
+        }
+        wait()
+    }
+
+    func testApplicativeStyleAdd() {
         let f = add <%> genuineAsync(3) <*> genuineAsync(8)
         f.get { v in
             XCTAssertEqual(v, 11)
@@ -146,8 +196,17 @@ class FutureTests: XCTestCase {
         }
         wait()
     }
-    
-    func testMonadicBind() {
+
+    func testApplicativeStyleSubtract() {
+        let f = subtract <%> genuineAsync(8) <*> genuineAsync(3)
+        f.get { v in
+            XCTAssertEqual(v, 5)
+            self.async?.fulfill()
+        }
+        wait()
+    }
+
+    func testMonadicBindAdd() {
         let f = pure(2) >>- asyncAdd(3)
         f.get { v in
             XCTAssertEqual(v, 5)
@@ -156,7 +215,16 @@ class FutureTests: XCTestCase {
         wait()
     }
 
-    func testChainedMonadicBind() {
+    func testMonadicBindSubtract() {
+        let f = pure(2) >>- asyncSubtract(3)
+        f.get { v in
+            XCTAssertEqual(v, 1) // 3-2
+            self.async?.fulfill()
+        }
+        wait()
+    }
+
+    func testChainedMonadicBindAdd() {
         let f = pure(2) >>- asyncAdd(3) >>- asyncAdd(7)
         f.get { v in
             XCTAssertEqual(v, 12)
@@ -164,8 +232,17 @@ class FutureTests: XCTestCase {
         }
         wait()
     }
-    
-    func testMonadicBindWithReduce() {
+
+    func testChainedMonadicBindSubtract() {
+        let f = pure(2) >>- asyncSubtract(3) >>- asyncSubtract(7)
+        f.get { v in
+            XCTAssertEqual(v, 6) // 7-(3-2)
+            self.async?.fulfill()
+        }
+        wait()
+    }
+
+    func testMonadicBindWithReduceAdd() {
         let values = [7, 9, 14, 3, 6].map(asyncAdd)
         let f = values.reduce(pure(0), combine: >>-)
         f.get { v in
@@ -174,55 +251,12 @@ class FutureTests: XCTestCase {
         }
         wait()
     }
-    
-    func testCapturingCompletionBlockWithAsyncDispatch() {
-        func async(r: Int, completion: Int -> ()) {
-            dispatch_async(dispatch_get_main_queue()) {
-                completion(r)
-            }
-        }
-        
-        let f = CompletionFuture<Int>()
-        async(3, completion: f.closure)
-        
-        f.get { r in
-            XCTAssertEqual(r, 3);
-            self.async?.fulfill()
-        }
-        wait()
-    }
 
-    func testCapturingCompletionBlockWithSyncDispatch() {
-        func sync(r: Int, completion: Int -> ()) {
-            completion(r)
-        }
-        
-        let f = CompletionFuture<Int>()
-        sync(3, completion: f.closure)
-        
-        f.get { r in
-            XCTAssertEqual(r, 3);
-            self.async?.fulfill()
-        }
-        wait()
-    }
-    
-    func testApplicativeUseOfCompletionClosures() {
-        func async(r: Int, completion: Int -> ()) {
-            dispatch_async(dispatch_get_main_queue()) {
-                completion(r)
-            }
-        }
-        
-        let f = CompletionFuture<Int>()
-        let g = CompletionFuture<Int>()
-
-        async(3, completion: f.closure)
-        async(6, completion: g.closure)
-        
-        let r = add <%> f <*> g
-        r.get { v in
-            XCTAssertEqual(v, 9);
+    func testMonadicBindWithReduceSubtract() {
+        let values = [7, 9, 14, 3, 6].map(asyncSubtract)
+        let f = values.reduce(pure(0), combine: >>-)
+        f.get { v in
+            XCTAssertEqual(v, 15) // 6-(3-(14-(9-(7-0))))
             self.async?.fulfill()
         }
         wait()

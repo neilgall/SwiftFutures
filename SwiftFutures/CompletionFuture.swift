@@ -40,3 +40,50 @@ public class CompletionFuture<Result> : FutureType {
         }
     }
 }
+
+public func future<C>(f: (C -> ()) -> ()) -> CompletionFuture<C> {
+    let c = CompletionFuture<C>()
+    f(c.closure)
+    return c
+}
+
+public func future<A0,C>(f: (A0, C -> ()) -> ())(_ a0: A0) -> CompletionFuture<C> {
+    let c = CompletionFuture<C>()
+    f(a0, c.closure)
+    return c
+}
+
+public func future<A0,A1,C>(f: (A0, A1, C -> ()) -> ())(_ a0: A0, _ a1: A1) -> CompletionFuture<C> {
+    let c = CompletionFuture<C>()
+    f(a0, a1, c.closure)
+    return c
+}
+
+public func future<A0,A1,A2,C>(f: (A0, A1, A2, C -> ()) -> ())(_ a0: A0, _ a1: A1, _ a2: A2) -> CompletionFuture<C> {
+    let c = CompletionFuture<C>()
+    f(a0, a1, a2, c.closure)
+    return c
+}
+
+public func future<A0,A1,A2,A3,C>(f: (A0, A1, A2, A3, C -> ()) -> ())(_ a0: A0, _ a1: A1, _ a2: A2, _ a3: A3) -> CompletionFuture<C> {
+    let c = CompletionFuture<C>()
+    f(a0, a1, a2, a3, c.closure)
+    return c
+}
+
+public func future<A0,A1,A2,A3,A4,C>(f: (A0, A1, A2, A3, A4, C -> ()) -> ())(_ a0: A0, _ a1: A1, _ a2: A2, _ a3: A3, _ a4: A4) -> CompletionFuture<C> {
+    let c = CompletionFuture<C>()
+    f(a0, a1, a2, a3, a4, c.closure)
+    return c
+}
+
+public func liftM<A0,C>(f: (A0, C -> ()) -> ()) -> (A0 -> CompletionFuture<C>) {
+    let c = CompletionFuture<C>()
+    return { a0 in f(a0, c.closure); return c }
+}
+
+public func liftM<A0,A1,C>(f: (A0, A1, C -> ()) -> ()) -> (A0 -> A1 -> CompletionFuture<C>) {
+    let c = CompletionFuture<C>()
+    return { a0 in { a1 in f(a0, a1, c.closure); return c } }
+}
+

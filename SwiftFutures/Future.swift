@@ -41,7 +41,7 @@ extension FutureType {
     // Flat-map f over this future. Returns the result of f
     // when applied to the eventual value in this future.
     //
-    // @param f a function receiving this future's Value
+    // @param f a function receiving this future's Value and returning a future
     // @return the result of applying f to this future's eventual value
     //
     public func flatMap<V, F: FutureType where F.Value == V>(f: Value -> F) -> Future<V> {
