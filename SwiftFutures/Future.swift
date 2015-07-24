@@ -104,7 +104,7 @@ public func <%> <F:FutureType, R>(lhs: F.Value -> R, rhs: F) -> Future<R> {
 //
 infix operator <*> { associativity left }
 public func <*> <LHS:FutureType, RHS:FutureType, R where LHS.Value == RHS.Value -> R>(lhs: LHS, rhs: RHS) -> Future<R> {
-    return Future() { getb in rhs.get { a in lhs.get { getb($0(a)) } } }
+    return Future() { getrhs in rhs.get { a in lhs.get { getrhs($0(a)) } } }
 }
 
 // Infix monadic bind between futures. m a -> (a -> m b) -> m b
@@ -116,5 +116,26 @@ public func <*> <LHS:FutureType, RHS:FutureType, R where LHS.Value == RHS.Value 
 //
 infix operator >>- { associativity left }
 public func >>- <LHS:FutureType, RHS:FutureType> (lhs: LHS, rhs: LHS.Value -> RHS) -> Future<RHS.Value> {
-    return Future() { getb in lhs.get { rhs($0).get(getb) } }
+    return Future() { getrhs in lhs.get { rhs($0).get(getrhs) } }
+}
+
+// Infix monadic bind between futures, discarding the intermediate value. m a -> m b -> m b
+//
+// @param lhs A future value
+// @param rhs A function returning a future value
+// @return A new future representing the lhs sequenced before the rhs
+//
+infix operator >>| { associativity left }
+public func >>| <LHS:FutureType, RHS:FutureType> (lhs: LHS, rhs: () -> RHS) -> Future<RHS.Value> {
+    return Future() { getrhs in lhs.get { _ in rhs().get(getrhs) } }
+}
+
+// Infix end-of-chain binding which breaks out of the monad. m a -> (a -> ()) -> ()
+// Yes, not strictly functional but this is Swift not Haskell.
+//
+// @param lhs a Future value
+// @param rhs a closure receiving the value type inside LHS and returning nothing
+//
+public func >>- <LHS:FutureType> (lhs: LHS, rhs: LHS.Value -> ()) {
+    return lhs.get() { value in rhs(value) }
 }

@@ -7,9 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		286115371B60CD5800268DDB /* CompletionFuture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286115361B60CD5800268DDB /* CompletionFuture.swift */; };
-		286115381B60CE3700268DDB /* CompletionFuture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286115361B60CD5800268DDB /* CompletionFuture.swift */; };
-		2861153B1B61122200268DDB /* CompletionFutureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2861153A1B61122200268DDB /* CompletionFutureTests.swift */; };
+		286115441B61213E00268DDB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286115431B61213E00268DDB /* AppDelegate.swift */; };
+		286115491B61213E00268DDB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 286115471B61213E00268DDB /* Main.storyboard */; };
+		2861154B1B61213E00268DDB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2861154A1B61213E00268DDB /* Assets.xcassets */; };
+		2861154E1B61213E00268DDB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2861154C1B61213E00268DDB /* LaunchScreen.storyboard */; };
+		286115541B61218200268DDB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286115531B61218200268DDB /* ViewController.swift */; };
+		286115551B61225E00268DDB /* Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE3CA71B6040310071174F /* Either.swift */; };
+		286115561B61226100268DDB /* Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE3CA91B6041510071174F /* Future.swift */; };
+		286115591B616EFB00268DDB /* BlockChaining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286115581B616EFB00268DDB /* BlockChaining.swift */; };
+		2861155B1B617F5600268DDB /* BlockChainingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2861155A1B617F5600268DDB /* BlockChainingTests.swift */; };
+		2861155C1B617FE500268DDB /* BlockChaining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286115581B616EFB00268DDB /* BlockChaining.swift */; };
+		2861155D1B617FE600268DDB /* BlockChaining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286115581B616EFB00268DDB /* BlockChaining.swift */; };
 		28CE3C911B60401A0071174F /* SwiftFutures.h in Headers */ = {isa = PBXBuildFile; fileRef = 28CE3C901B60401A0071174F /* SwiftFutures.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		28CE3C981B60401A0071174F /* SwiftFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28CE3C8D1B60401A0071174F /* SwiftFutures.framework */; };
 		28CE3CA81B6040310071174F /* Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CE3CA71B6040310071174F /* Either.swift */; };
@@ -31,8 +39,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		286115361B60CD5800268DDB /* CompletionFuture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompletionFuture.swift; sourceTree = "<group>"; };
-		2861153A1B61122200268DDB /* CompletionFutureTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompletionFutureTests.swift; sourceTree = "<group>"; };
+		286115411B61213E00268DDB /* Examples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Examples.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		286115431B61213E00268DDB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		286115481B61213E00268DDB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2861154A1B61213E00268DDB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2861154D1B61213E00268DDB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2861154F1B61213E00268DDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		286115531B61218200268DDB /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		286115581B616EFB00268DDB /* BlockChaining.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockChaining.swift; sourceTree = "<group>"; };
+		2861155A1B617F5600268DDB /* BlockChainingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockChainingTests.swift; sourceTree = "<group>"; };
 		28CE3C8D1B60401A0071174F /* SwiftFutures.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftFutures.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		28CE3C901B60401A0071174F /* SwiftFutures.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftFutures.h; sourceTree = "<group>"; };
 		28CE3C921B60401A0071174F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -46,6 +61,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		2861153E1B61213E00268DDB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		28CE3C891B60401A0071174F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -64,19 +86,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		286115391B60ED2000268DDB /* Examples */ = {
+		286115421B61213E00268DDB /* Examples */ = {
 			isa = PBXGroup;
 			children = (
+				286115431B61213E00268DDB /* AppDelegate.swift */,
+				286115471B61213E00268DDB /* Main.storyboard */,
+				286115531B61218200268DDB /* ViewController.swift */,
+				2861154A1B61213E00268DDB /* Assets.xcassets */,
+				2861154C1B61213E00268DDB /* LaunchScreen.storyboard */,
+				2861154F1B61213E00268DDB /* Info.plist */,
 			);
-			name = Examples;
+			path = Examples;
 			sourceTree = "<group>";
 		};
 		28CE3C831B60401A0071174F = {
 			isa = PBXGroup;
 			children = (
-				286115391B60ED2000268DDB /* Examples */,
 				28CE3C8F1B60401A0071174F /* SwiftFutures */,
 				28CE3C9B1B60401A0071174F /* SwiftFuturesTests */,
+				286115421B61213E00268DDB /* Examples */,
 				28CE3C8E1B60401A0071174F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -86,6 +114,7 @@
 			children = (
 				28CE3C8D1B60401A0071174F /* SwiftFutures.framework */,
 				28CE3C971B60401A0071174F /* SwiftFuturesTests.xctest */,
+				286115411B61213E00268DDB /* Examples.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -96,7 +125,7 @@
 				28CE3C901B60401A0071174F /* SwiftFutures.h */,
 				28CE3CA71B6040310071174F /* Either.swift */,
 				28CE3CA91B6041510071174F /* Future.swift */,
-				286115361B60CD5800268DDB /* CompletionFuture.swift */,
+				286115581B616EFB00268DDB /* BlockChaining.swift */,
 				28CE3C921B60401A0071174F /* Info.plist */,
 			);
 			path = SwiftFutures;
@@ -108,7 +137,7 @@
 				28CE3C9E1B60401A0071174F /* Info.plist */,
 				28CE3CAC1B60475B0071174F /* EitherTests.swift */,
 				28CE3CB01B6049C00071174F /* FutureTests.swift */,
-				2861153A1B61122200268DDB /* CompletionFutureTests.swift */,
+				2861155A1B617F5600268DDB /* BlockChainingTests.swift */,
 				28CE3CAB1B60475B0071174F /* SwiftFuturesTests-Bridging-Header.h */,
 			);
 			path = SwiftFuturesTests;
@@ -128,6 +157,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		286115401B61213E00268DDB /* Examples */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 286115501B61213E00268DDB /* Build configuration list for PBXNativeTarget "Examples" */;
+			buildPhases = (
+				2861153D1B61213E00268DDB /* Sources */,
+				2861153E1B61213E00268DDB /* Frameworks */,
+				2861153F1B61213E00268DDB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Examples;
+			productName = Examples;
+			productReference = 286115411B61213E00268DDB /* Examples.app */;
+			productType = "com.apple.product-type.application";
+		};
 		28CE3C8C1B60401A0071174F /* SwiftFutures */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 28CE3CA11B60401A0071174F /* Build configuration list for PBXNativeTarget "SwiftFutures" */;
@@ -174,6 +220,9 @@
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Neil Gall";
 				TargetAttributes = {
+					286115401B61213E00268DDB = {
+						CreatedOnToolsVersion = 7.0;
+					};
 					28CE3C8C1B60401A0071174F = {
 						CreatedOnToolsVersion = 7.0;
 					};
@@ -188,6 +237,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 28CE3C831B60401A0071174F;
 			productRefGroup = 28CE3C8E1B60401A0071174F /* Products */;
@@ -196,11 +246,22 @@
 			targets = (
 				28CE3C8C1B60401A0071174F /* SwiftFutures */,
 				28CE3C961B60401A0071174F /* SwiftFuturesTests */,
+				286115401B61213E00268DDB /* Examples */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		2861153F1B61213E00268DDB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2861154E1B61213E00268DDB /* LaunchScreen.storyboard in Resources */,
+				2861154B1B61213E00268DDB /* Assets.xcassets in Resources */,
+				286115491B61213E00268DDB /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		28CE3C8B1B60401A0071174F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -218,12 +279,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		2861153D1B61213E00268DDB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				286115541B61218200268DDB /* ViewController.swift in Sources */,
+				286115551B61225E00268DDB /* Either.swift in Sources */,
+				286115561B61226100268DDB /* Future.swift in Sources */,
+				2861155D1B617FE600268DDB /* BlockChaining.swift in Sources */,
+				286115441B61213E00268DDB /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		28CE3C881B60401A0071174F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				28CE3CAA1B6041510071174F /* Future.swift in Sources */,
-				286115371B60CD5800268DDB /* CompletionFuture.swift in Sources */,
+				286115591B616EFB00268DDB /* BlockChaining.swift in Sources */,
 				28CE3CA81B6040310071174F /* Either.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -234,10 +307,10 @@
 			files = (
 				28CE3CAF1B6047870071174F /* Future.swift in Sources */,
 				28CE3CAE1B6047840071174F /* Either.swift in Sources */,
-				2861153B1B61122200268DDB /* CompletionFutureTests.swift in Sources */,
+				2861155C1B617FE500268DDB /* BlockChaining.swift in Sources */,
 				28CE3CB11B6049C00071174F /* FutureTests.swift in Sources */,
 				28CE3CAD1B60475B0071174F /* EitherTests.swift in Sources */,
-				286115381B60CE3700268DDB /* CompletionFuture.swift in Sources */,
+				2861155B1B617F5600268DDB /* BlockChainingTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,7 +324,48 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		286115471B61213E00268DDB /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				286115481B61213E00268DDB /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		2861154C1B61213E00268DDB /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2861154D1B61213E00268DDB /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		286115511B61213E00268DDB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Examples/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.neilgall.Examples;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		286115521B61213E00268DDB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Examples/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.neilgall.Examples;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		28CE3C9F1B60401A0071174F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -404,6 +518,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		286115501B61213E00268DDB /* Build configuration list for PBXNativeTarget "Examples" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				286115511B61213E00268DDB /* Debug */,
+				286115521B61213E00268DDB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		28CE3C871B60401A0071174F /* Build configuration list for PBXProject "SwiftFutures" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
